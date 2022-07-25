@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  server:
+    # Build the MHFZ server
+    build: ./server
+    ports:
+      - "10200:80"
+  db:
+    # Build the PostgreSQL database the server connects to
+    build: 
+      context: ./database
+    container_name: mhpostgres
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pgpass
+      - POSTGRES_DB=erupe
+    ports:
+      - "10201:5432"
+  pgadmin:
+    # Connect on host.docker.internal:10201
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@mhfz.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "5050:80"
