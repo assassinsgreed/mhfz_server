@@ -1,0 +1,1 @@
+If the CMD window opens and closes after you run the batch file, it's because you fucked up with the postgres password in config.json.

@@ -3,14 +3,18 @@ services:
   server:
     # Build the MHFZ server
     build: ./server
+    container_name: mhserver
+    restart: always
     ports:
       - "10200:80"
+    networks:
+      appNetwork:
+        ipv4_address: 172.24.10.1
+    command: "tail -f /dev/null"
   db:
     # Build the PostgreSQL database the server connects to
-    build: 
-      context: ./database
+    build: ./database
     container_name: mhpostgres
-    image: postgres
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -28,3 +32,11 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
       - "5050:80"
+# Expose server on a public IP
+networks:
+  appNetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.24.2.0/16"
