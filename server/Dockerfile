@@ -14,6 +14,3 @@ RUN apk add p7zip
 
 # Extract quests
 RUN cd /Erupe && 7z x Quests.7z
-
-# Run the server
-RUN cd /Erupe && go run main.go

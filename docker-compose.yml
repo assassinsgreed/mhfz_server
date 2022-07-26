@@ -10,7 +10,7 @@ services:
     networks:
       appNetwork:
         ipv4_address: 172.24.10.1
-    command: "tail -f /dev/null"
+    command: "sh -sc 'cd /Erupe && go run main.go && tail -f /dev/null'"
   db:
     # Build the PostgreSQL database the server connects to
     build: ./database
