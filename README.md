@@ -7,19 +7,36 @@ A collection of scripts to generate and start a Monster Hunter Frontier Z (MHFZ)
 ## Notes
 * This tool restores a database backup built off of the MH Frontier Z Community Server. It automatically applies Road Shop Items as part of the backup.
     * This includes server updates 1-8, and client updates 1 & 2
-* By default, a public server will be hosted on IP address *172.24.10.1*. If you do not want this:
-    * Remove the networks configurations in `docker-compose.yml` (lines 10-12, and 37-43)
-    * Update `./server/Erupe/config.json` and replace instances of *172.24.10.1* with *127.0.0.1*
 
 # Installation
 ## Pre-Requisites
 You will need [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed, as all components will be hosted inside Docker containers.
 
+## Optional (Recommended) Configuration
+1. Update `./docker-compose.yml` and replace the values for `POSTGRES_USER` and `POSTGRES_PASSWORD` with unique values
+2. Set these same values in `./server/Erupe/config.json` in the `database` section
+
+By default, a public server will be hosted on Docker's internal IP address *192.168.100.181*. If you do not want this:
+    * Remove the networks configurations in `docker-compose.yml` (lines 10-12, and 37-43)
+    * Update `./server/Erupe/config.json` and replace instances of *192.168.100.181* with another value
+
 ## Installation Steps
-1. Run `docker compose up db -d` to initialize the database
-2. Optionally run `docker compose up pgadmin -d` to create a container with the PGAdmin database interface tool
-3. Run `docker compose up server -d` to initialize the server
-    * This will take a long time to complete (45+ minutes). Grab a coffee and come back later!
+1. Run `docker compose up -d` to initialize the database, pgadmin, and server containers
+  * Run `docker compose up db -d` and `docker compose up server -d` if you do not want the PGAdmin database interface container
+2. Extract your Quests files into `./server/Erupe`. It should have the following content:
+  * ./server/Erupe/bin/quests
+  * ./server/Erupe/bin/scenarios 
+4. Modify your local hosts file (C:\Windows\System32\drivers\etc\hosts) to include the following:
+
+```
+192.168.100.181 mhfg.capcom.com.tw
+192.168.100.181 mhf-n.capcom.com.tw
+192.168.100.181 cog-members.mhf-z.jp
+192.168.100.181 www.capcom-onlinegames.jp
+192.168.100.181 srv-mhf.capcom-networks.jp
+```
+
+5. Run your MHFZ client, optionally with a locale emulator set to JP.
 
 ## Acknowledgement
 This project would not be possible without the hard work of the MHF community. Some special shoutouts include:

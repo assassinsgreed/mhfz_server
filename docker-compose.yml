@@ -10,6 +10,12 @@ services:
     networks:
       appNetwork:
         ipv4_address: 172.24.10.1
+    extra_hosts:
+      - "mhfg.capcom.com.tw:127.0.0.1"
+      - "mhf-n.capcom.com.tw:127.0.0.1"
+      - "cog-members.mhf-z.jp:127.0.0.1"
+      - "www.capcom-onlinegames.jp:127.0.0.1"
+      - "srv-mhf.capcom-networks.jp:127.0.0.1"
     command: "sh -sc 'cd /Erupe && go run main.go && tail -f /dev/null'"
   db:
     # Build the PostgreSQL database the server connects to

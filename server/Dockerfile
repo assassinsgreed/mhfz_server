@@ -12,5 +12,11 @@ RUN apk add --no-cache ca-certificates
 # Install packages required by server
 RUN apk add p7zip
 
-# Extract quests
-RUN cd /Erupe && 7z x Quests.7z
+# Expose server ports
+EXPOSE 80
+EXPOSE 53312
+EXPOSE 54001
+EXPOSE 54002
+EXPOSE 54003
+EXPOSE 54004
+EXPOSE 53310
