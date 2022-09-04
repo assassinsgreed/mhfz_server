@@ -4,6 +4,8 @@ A collection of scripts to generate and start a Monster Hunter Frontier Z (MHFZ)
 * Database
 * Server
 
+⚠ At the time of writing, a server will be successfully launched in Docker but it cannot be reached. It is recommended to run the server locally instead ⚠
+
 ## Notes
 * This tool restores a database backup built off of the MH Frontier Z Community Server. It automatically applies Road Shop Items as part of the backup.
     * This includes server updates 1-8, and client updates 1 & 2
@@ -16,9 +18,9 @@ You will need [Docker Desktop](https://www.docker.com/products/docker-desktop/) 
 1. Update `./docker-compose.yml` and replace the values for `POSTGRES_USER` and `POSTGRES_PASSWORD` with unique values
 2. Set these same values in `./server/Erupe/config.json` in the `database` section
 
-By default, a public server will be hosted on Docker's internal IP address *192.168.100.181*. If you do not want this:
+By default, a public server will be hosted on Docker's internal IP address. If you do not want this:
     * Remove the networks configurations in `docker-compose.yml` (lines 10-12, and 37-43)
-    * Update `./server/Erupe/config.json` and replace instances of *192.168.100.181* with another value
+    * Update `./server/Erupe/config.json` and replace instances of *127.0.0.1* with another value
 
 ## Installation Steps
 1. Run `docker compose up -d` to initialize the database, pgadmin, and server containers
@@ -29,11 +31,11 @@ By default, a public server will be hosted on Docker's internal IP address *192.
 4. Modify your local hosts file (C:\Windows\System32\drivers\etc\hosts) to include the following:
 
 ```
-192.168.100.181 mhfg.capcom.com.tw
-192.168.100.181 mhf-n.capcom.com.tw
-192.168.100.181 cog-members.mhf-z.jp
-192.168.100.181 www.capcom-onlinegames.jp
-192.168.100.181 srv-mhf.capcom-networks.jp
+127.0.0.1 mhfg.capcom.com.tw
+127.0.0.1 mhf-n.capcom.com.tw
+127.0.0.1 cog-members.mhf-z.jp
+127.0.0.1 www.capcom-onlinegames.jp
+127.0.0.1 srv-mhf.capcom-networks.jp
 ```
 
 5. Run your MHFZ client, optionally with a locale emulator set to JP.

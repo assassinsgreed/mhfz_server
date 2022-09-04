@@ -13,7 +13,6 @@ RUN apk add --no-cache ca-certificates
 RUN apk add p7zip
 
 # Expose server ports
-EXPOSE 80
 EXPOSE 53312
 EXPOSE 54001
 EXPOSE 54002
